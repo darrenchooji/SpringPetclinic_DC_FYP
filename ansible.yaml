@@ -20,6 +20,6 @@
     - name: Build Docker container locally
       shell: |
         cd /root
-        docker build -t fypjsecuredevops/springpetclinic:latest .
+        docker build -t darrenchooji/springpetclinic:latest .
     - name: Create new deployment 
       command: kubectl apply -f /root/deployment.yaml

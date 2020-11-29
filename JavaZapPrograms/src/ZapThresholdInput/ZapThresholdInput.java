@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ZapThresholdInput {
@@ -15,13 +16,13 @@ public class ZapThresholdInput {
 
         int high, medium, low, informational;
         System.out.print("Maximum number of High Risk Level Alerts: ");
-        high = input.nextInt();
+        high = getThresholdInput();
         System.out.print("Maximum number of Medium Risk Level Alerts: ");
-        medium = input.nextInt();
+        medium = getThresholdInput();
         System.out.print("Maximum number of Low Risk Level Alerts: ");
-        low = input.nextInt();
+        low = getThresholdInput();
         System.out.print("Maximum number of Informational Risk Level Alerts: ");
-        informational = input.nextInt();
+        informational = getThresholdInput();
 
         ZapRiskLevels zapRiskLevels = new ZapRiskLevels(high, medium, low, informational);
         try {
@@ -34,5 +35,20 @@ public class ZapThresholdInput {
         catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
+    }
+    public static int getThresholdInput() {
+        Scanner input = new Scanner(System.in);
+        boolean exception = true;
+        int thresholdInput = 0;
+        while (exception) {
+            try {
+                thresholdInput = input.nextInt();
+                exception = false;
+            } catch(InputMismatchException inputMismatchException) {
+                System.out.print("\nInvalid Input!! Enter again: ");
+                input.next();
+            }
+        }
+        return thresholdInput;
     }
 }
